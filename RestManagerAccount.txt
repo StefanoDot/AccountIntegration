@@ -1,0 +1,238 @@
+/**
+ * Created by Stefano on 05/12/2019.
+ */
+@RestResource(urlMapping='/Account/*')
+global with sharing class RestAccountManager {
+    /*Metodo per inserimento account da Sap to Salesforce.
+    * nella put arriva un json che corrisponde al wrapper
+    * accountWrapper. dopo il mapping viene inserito in una lista
+    * ed successivamente viene effettuato l'insert
+     */
+    @HttpPut
+    global static void insertAccount(List<accountWrapper> data) {
+        List<Account> toInsert = new List<Account>();
+        for(accountWrapper elem : data){
+            Account temp = new Account();
+            temp.Ascadere__c =Double.valueOf(elem.a_scadere);
+            temp.Name =elem.name;
+            //temp.AccountNumber =elem.accountnumber;
+           // temp.OwnerId =elem.ownerid;
+            temp.Site =elem.site;
+            temp.AccountSource =elem.accountsource;
+            //temp.Ammontaretotaledelleopportunita__c =elem.ammontaretotaledelleopportunita;
+            //temp.BillingAddress =elem.billingaddress;
+            temp.Campagna__c =elem.campagna;
+            temp.Cap__c =elem.cap;
+            temp.Clientecondiviso__c =Boolean.valueOf(elem.clientecondiviso);
+            temp.CodiceFiscale__c =elem.codicefiscale;
+            temp.CodiceSAP__c =elem.codicesap;
+            temp.CodiceSDI__c =elem.codicesdi;
+            //temp.CreatedById =elem.createdbyid;
+            temp.Data_verifica_mk_denial_list__c =Date.valueOf(elem.data_verifica_mk_denial_list);
+            temp.Jigsaw =elem.jigsaw;
+            temp.Description =elem.description;
+            //temp.DivisioneCommerciale__c =elem.divisionecommerciale;
+            temp.Email__c =elem.email;
+            temp.NumberOfEmployees =Integer.valueOf(elem.numberofemployees);
+            temp.Esposizione__c =Double.valueOf(elem.esposizione);
+            temp.FattWP__c =Double.valueOf(elem.fattwp);
+            temp.FattWP1__c =Double.valueOf(elem.fattwp1);
+            temp.FattWP2__c =Double.valueOf(elem.fattwp2);
+            temp.FattWP3__c =Double.valueOf(elem.fattwp3);
+            temp.Fax =elem.fax;
+            temp.Fido__c =Double.valueOf(elem.fido);
+            temp.Filialen1__c =elem.filialen1;
+            temp.Filialen2__c =elem.filialen2;
+            temp.Filialen3__c =elem.filialen3;
+            temp.Filialen4__c =elem.filialen4;
+            temp.Filialen5__c =elem.filialen5;
+            temp.Filialen6__c =elem.filialen6;
+            temp.FormaGiuridica__c =elem.formagiuridica;
+            temp.Industry =elem.industry;
+           // temp.LastModifiedById =elem.lastmodifiedbyid;
+            temp.Liberatoria__c =Boolean.valueOf(elem.liberatoria);
+            //temp.Link_Account__c =elem.link_account;
+            temp.MKDenialList__c =Boolean.valueOf(elem.mkdeniallist);
+            temp.NumeroSediEstero__c =Decimal.valueOf(elem.numerosediestero);
+            temp.NumeroSediItalia__c =Decimal.valueOf(elem.numerosediitalia);
+            temp.OrdinatoWP__c =Decimal.valueOf(elem.ordinatowp);
+            temp.OrdinatoWP1__c =Decimal.valueOf(elem.ordinatowp1);
+            temp.OrdinatoWP2__c =Decimal.valueOf(elem.ordinatowp2);
+            temp.OrdinatoWP3__c =Decimal.valueOf(elem.ordinatowp3);
+            temp.Ownership =elem.ownership;
+            temp.ParentId =elem.parentid;
+            temp.PartitaIVA__c =elem.partitaiva;
+            temp.Phone =elem.phone;
+            temp.ProjectServiceManager__c =elem.projectservicemanager;
+            temp.Provincia__c =elem.provincia;
+            temp.Rating =elem.rating;
+            temp.Regione__c =elem.regione;
+            temp.SAP_Import__c =true;
+            temp.Scaduto__c =Decimal.valueOf(elem.scaduto);
+            temp.Segmento__c =elem.segmento;
+            temp.SettoreMerceologico__c =elem.settoremerceologico;
+            //temp.ShippingAddress =Address.valueOf(elem.shippingaddress);
+            temp.Sic =elem.sic;
+            temp.SicDesc =elem.sicdesc;
+            temp.Stato__c =elem.stato;
+            temp.TickerSymbol =elem.tickersymbol;
+            temp.Tipo__c =elem.tipo;
+            temp.Type =elem.type;
+            temp.Website =elem.website;
+            temp.Assegnato_a__c =elem.assegnato_a;
+            toInsert.add(temp);
+        }
+        insert toInsert;
+    }
+/*
+*Wrapper per mappare i filed dell'account
+ */
+
+    global class accountWrapper {
+        global String customer_id {get; set;}
+        global String created {get; set;}
+        global String updated {get; set;}
+        global String mnt_type {get; set;}
+        global String a_scadere {get; set;}
+        global String name {get; set;}
+        global String accountnumber {get; set;}
+        global String ownerid {get; set;}
+        global String site {get; set;}
+        global String accountsource {get; set;}
+        global String ammontaretotaledelleopportunita {get; set;}
+        global String billingaddress {get; set;}
+        global String campagna{get; set;}
+        global String cap {get; set;}
+        global String clientecondiviso {get; set;}
+        global String codicefiscale {get; set;}
+        global String codicesap {get; set;}
+        global String codicesdi {get; set;}
+        global String createdbyid {get; set;}
+        global String data_verifica_mk_denial_list {get; set;}
+        global String jigsaw {get; set;}
+        global String description {get; set;}
+        global String divisionecommerciale {get; set;}
+        global String email {get; set;}
+        global String numberofemployees {get; set;}
+        global String esposizione {get; set;}
+        global String fattwp {get; set;}
+        global String fattwp1 {get; set;}
+        global String fattwp2 {get; set;}
+        global String fattwp3 {get; set;}
+        global String fax {get; set;}
+        global String fido {get; set;}
+        global String filialen1 {get; set;}
+        global String filialen2 {get; set;}
+        global String filialen3 {get; set;}
+        global String filialen4 {get; set;}
+        global String filialen5 {get; set;}
+        global String filialen6 {get; set;}
+        global String formagiuridica {get; set;}
+        global String industry {get; set;}
+        global String lastmodifiedbyid {get; set;}
+        global String liberatoria {get; set;}
+        global String link_account {get; set;}
+        global String mkdeniallist {get; set;}
+        global String numerosediestero {get; set;}
+        global String numerosediitalia {get; set;}
+        global String ordinatowp {get; set;}
+        global String ordinatowp1 {get; set;}
+        global String ordinatowp2 {get; set;}
+        global String ordinatowp3 {get; set;}
+        global String ownership {get; set;}
+        global String parentid {get; set;}
+        global String partitaiva {get; set;}
+        global String phone {get; set;}
+        global String projectservicemanager {get; set;}
+        global String provincia {get; set;}
+        global String rating {get; set;}
+        global String regione {get; set;}
+        global String sap_import {get; set;}
+        global String scaduto {get; set;}
+        global String segmento {get; set;}
+        global String settoremerceologico {get; set;}
+        global String shippingaddress {get; set;}
+        global String sic {get; set;}
+        global String sicdesc {get; set;}
+        global String stato {get; set;}
+        global String tickersymbol {get; set;}
+        global String tipo {get; set;}
+        global String type {get; set;}
+        global String website {get; set;}
+        global String assegnato_a {get; set;}
+
+        public accountWrapper(){
+
+        }
+
+       /* public accountWrapper(Map<String, String> row) {
+            this.a_scadere=row.get('a_scadere');
+            this.account_name=row.get('account_name');
+            this.account_number=row.get('account_number');
+            this.account_owner=row.get('account_owner');
+            this.account_site=row.get('account_site');
+            this.account_source=row.get('account_source');
+            this.annual_revenue=row.get('annual_revenue');
+            this.billing_address=row.get('billing_address');
+            this.campagna=row.get('campagna');
+            this.cap=row.get('cap');
+            this.cliente_condiviso=row.get('cliente_condiviso');
+            this.codice_fiscale=row.get('codice_fiscale');
+            this.codice_sap=row.get('codice_sap');
+            this.codice_sdi=row.get('codice_sdi');
+            this.created_by=row.get('created_by');
+            this.data_verifica_mkdeniallist=row.get('data_verifica_mkdeniallist');
+            this.data_com_key=row.get('data_com_key');
+            this.description=row.get('description');
+            this.divisione_commerciale=row.get('divisione_commerciale');
+            this.email=row.get('email');
+            this.employees=row.get('employees');
+            this.esposizione=row.get('esposizione');
+            this.fatt_wp=row.get('fatt_wp');
+            this.fatt_wp_1=row.get('fatt_wp_1');
+            this.fatt_wp_2=row.get('fatt_wp_2');
+            this.fatt_wp_3=row.get('fatt_wp_3');
+            this.fax=row.get('fax');
+            this.fido=row.get('fido');
+            this.filiale_n_1=row.get('filiale_n_1');
+            this.filiale_n_2=row.get('filiale_n_2');
+            this.filiale_n_3=row.get('filiale_n_3');
+            this.filiale_n_4=row.get('filiale_n_4');
+            this.filiale_n_5=row.get('filiale_n_5');
+            this.filiale_n_6=row.get('filiale_n_6');
+            this.forma_giuridica=row.get('forma_giuridica');
+            this.industry=row.get('industry');
+            this.last_modifiedby=row.get('last_modifiedby');
+            this.liberatoria=row.get('liberatoria');
+            this.link_account=row.get('link_account');
+            this.mk_deniallist=row.get('mk_deniallist');
+            this.numero_sedi_estero=row.get('numero_sedi_estero');
+            this.numero_sedi_italia=row.get('numero_sedi_italia');
+            this.ordinato_wp=row.get('ordinato_wp');
+            this.ordinato_wp_1=row.get('ordinato_wp_1');
+            this.ordinato_wp_2=row.get('ordinato_wp_2');
+            this.ordinato_wp_3=row.get('ordinato_wp_3');
+            this.ownership=row.get('ownership');
+            this.parent_account=row.get('parent_account');
+            this.partita_iva=row.get('partita_iva');
+            this.phone=row.get('phone');
+            this.project_service_manager=row.get('project_service_manager');
+            this.provincia=row.get('provincia');
+            this.rating=row.get('rating');
+            this.regione=row.get('regione');
+            this.sap_import=row.get('sap_import');
+            this.scaduto=row.get('scaduto');
+            this.segmento=row.get('segmento');
+            this.settore_merceologico=row.get('settore_merceologico');
+            this.shipping_address=row.get('shipping_address');
+            this.sic_code=row.get('sic_code');
+            this.sic_description=row.get('sic_description');
+            this.stato=row.get('stato');
+            this.ticker_symbol=row.get('ticker_symbol');
+            this.tipo=row.get('tipo');
+            this.type=row.get('type');
+            this.website=row.get('website');
+            this.assegnato_a=row.get('assegnato_a');
+        }*/
+    }
+}
